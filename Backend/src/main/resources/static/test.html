@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Task</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h2 class="mt-5">Create Task</h2>
+    <form method="post" action="/tasks">
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" class="form-control" id="title" name="title" required>
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="status">Status</label>
+            <select class="form-control" id="status" name="status" required>
+                <option value="">Select Status</option>
+                <option value="TO DO">TO DO</option>
+                <option value="IN PROGRESS">IN PROGRESS</option>
+                <option value="DONE">DONE</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="due_date">Due Date</label>
+            <input type="date" class="form-control" id="due_date" name="due_date">
+        </div>
+        <div class="form-group">
+            <label for="priority">Priority</label>
+            <select class="form-control" id="priority" name="priority" required>
+                <option value="">Select Priority</option>
+                <option value="LOW">LOW</option>
+                <option value="MEDIUM">MEDIUM</option>
+                <option value="HIGH">HIGH</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Create Task</button>
+    </form>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
