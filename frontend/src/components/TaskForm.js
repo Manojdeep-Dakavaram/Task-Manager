@@ -29,14 +29,15 @@ const TaskForm = ({ currentTask, setCurrentTask }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const task = { id, title, description, status, dueDate, priority };
 
     if (currentTask) {
+      const task = { id, title, description, status, dueDate, priority };
       axios.put(`http://localhost:8080/tasks/${currentTask.id}`, task)
       .then(response => {
         setCurrentTask(null);
       });
     } else {
+      const task = { title, description, status, dueDate, priority };
       axios.post('http://localhost:8080/tasks', task)
       .then(response => {
         setCurrentTask(response.data);
