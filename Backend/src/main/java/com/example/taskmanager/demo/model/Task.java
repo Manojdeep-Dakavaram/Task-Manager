@@ -26,15 +26,20 @@ public class Task {
     @Pattern(regexp = "LOW|MEDIUM|HIGH", message = "Priority must be one of LOW, MEDIUM, HIGH")
     private String priority;
 
+    @NotEmpty(message = "email must not be empty")
+    @NotNull(message = "email must not be empty")
+    private String email;
+
     public Task() {
     }
 
-    public Task(String title, String description, String status, Date dueDate, String priority) {
+    public Task(String title, String description, String status, Date dueDate, String priority,String email) {
         this.title = title;
         this.description = description;
         this.status = status;
         this.due_date = dueDate;
         this.priority = priority;
+        this.email = email;
     }
     public long getId() {
         return id;
@@ -50,6 +55,14 @@ public class Task {
 
     public String getStatus() {
         return status;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public Date getDueDate() {

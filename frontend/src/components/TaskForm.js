@@ -29,15 +29,15 @@ const TaskForm = ({ currentTask, setCurrentTask }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    const email = sessionStorage.getItem('email');
     if (currentTask) {
-      const task = { id, title, description, status, dueDate, priority };
-      axios.put(`http://localhost:8080/tasks/${currentTask.id}`, task)
+      const task = { id, title, description, status, dueDate, priority, email };
+      axios.put(`http://localhost:8080/tasks/${email}/${currentTask.id}`, task)
       .then(response => {
         setCurrentTask(null);
       });
     } else {
-      const task = { title, description, status, dueDate, priority };
+      const task = { title, description, status, dueDate, priority, email };
       axios.post('http://localhost:8080/tasks', task)
       .then(response => {
         setCurrentTask(response.data);
@@ -47,7 +47,8 @@ const TaskForm = ({ currentTask, setCurrentTask }) => {
 
   const handleDelete = (e) => {
     e.preventDefault();
-    axios.delete(`http://localhost:8080/tasks/${currentTask.id}`)
+     const email = sessionStorage.getItem('email');
+    axios.delete(`http://localhost:8080/tasks/${email}/${currentTask.id}`)
     .then(response => {
       setCurrentTask(null);
     });

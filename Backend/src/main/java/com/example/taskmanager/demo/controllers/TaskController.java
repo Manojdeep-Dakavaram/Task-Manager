@@ -27,29 +27,56 @@ public class TaskController {
         return taskService.createTask(task);
     }
 
-    @GetMapping("/tasks/{id}")
+    /*@GetMapping("/tasks/{id}")
     public Task getTask(@PathVariable long id){
         Task task = taskService.getTaskByID(id);
         if (task == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         return task;
-    }
+    }*/
 
-    @GetMapping("/tasks")
+    /*@GetMapping("/tasks")
     public Iterable<Task> getTasks(){
         return taskService.getAllTasks();
-    }
+    }*/
 
-    @PutMapping("/tasks/{id}")
-    public Task updateTask(@PathVariable long id, @RequestBody Task task){
+    @PutMapping("/tasks/{email}/{id}")
+    public Task updateTask(@PathVariable long id, @PathVariable String email, @RequestBody Task task){
         Task old_task = taskService.getTaskByID(id);
         if (old_task == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        if (!task.getEmail().equals(email)) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "You are not authorized to view this task.");
+        }
         return taskService.updateTask(id,task);
     }
 
-    @DeleteMapping("tasks/{id}")
-    public void deleteTask(@PathVariable long id){
+    @DeleteMapping("tasks/{email}/{id}")
+    public void deleteTask(@PathVariable long id,@PathVariable String email){
         Task task = taskService.getTaskByID(id);
         if (task == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        if (!task.getEmail().equals(email)) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "You are not authorized to view this task.");
+        }
         taskService.deleteTask(id);
+    }
+
+    @GetMapping("/tasks/{email}/{id}")
+    public Task getTask(@PathVariable long id, @PathVariable String email) {
+        Task task = taskService.getTaskByID(id);
+
+        if (task == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+        if (!task.getEmail().equals(email)) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "You are not authorized to view this task.");
+        }
+        return task;
+    }
+
+    @GetMapping("/tasks/{email}")
+    public Iterable<Task> getTasks(@PathVariable String email) {
+        if (email==null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+        return taskService.getTasksByEmail(email);
     }
 }

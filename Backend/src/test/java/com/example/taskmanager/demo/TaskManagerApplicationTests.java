@@ -30,7 +30,7 @@ class TaskManagerApplicationTests {
 	public void testCreateTask() {
 		// Arrange
 		Date today = Calendar.getInstance().getTime();
-		Task task = new Task("Test Task", "Test Description", "TO DO", today , "HIGH");
+		Task task = new Task("Test Task", "Test Description", "TO DO", today , "HIGH","user1@gmail.com");
 
 		// Act
 		Task savedTask = taskRepository.save(task);

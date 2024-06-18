@@ -25,6 +25,9 @@ public class TaskService {
         return taskRepo.findAll();
     }
 
+    public Iterable<Task> getTasksByEmail(String email){
+        return taskRepo.findByEmail(email);
+    }
     public Task updateTask(long id, Task task){
         Task oldTask = getTaskByID(id);
         if(oldTask == null || task == null)

@@ -92,4 +92,14 @@
   .delete-button:hover {
     background-color: #cc0000;
   }
+
+  .button-logout {
+      padding: 10px;
+      border: none;
+      background-color: #007bff;
+      color: white;
+      border-radius: 4px;
+      cursor: pointer;
+      margin: 10px;
+    }
   
